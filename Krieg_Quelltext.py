@@ -1,0 +1,297 @@
+from random import*
+import random
+
+#Funktionen
+def wert_der_karte(wert):
+    if(wert=="A"):
+        zahl=14
+    elif(wert=="B"):
+        zahl=11
+    elif(wert=="D"):
+        zahl=12
+    elif(wert=="K"):
+        zahl=13
+    elif(wert==2):
+        zahl=2
+    elif(wert==3):
+        zahl=3
+    elif(wert==4):
+        zahl=4
+    elif(wert==5):
+        zahl=5
+    elif(wert==6):
+        zahl=6
+    elif(wert==7):
+        zahl=7
+    elif(wert==8):
+        zahl=8
+    elif(wert==9):
+        zahl=9
+    elif(wert==10):
+        zahl=10
+    return zahl
+
+
+
+karten_spieler1=[]
+karten_spieler2=[]
+
+kartendeck=[2,3,4,5,6,7,8,9,10,"B","K","D","A",2,3,4,5,6,7,8,9,10,"B","K","D","A",2,3,4,5,6,7,8,9,10,"B","K","D","A",2,3,4,5,6,7,8,9,10,"B","K","D","A"]
+
+for c in range(len(kartendeck)):
+
+    while(len(karten_spieler1)<=25 and len(karten_spieler2)<=25):
+        ziehen=random.randint(0,len(kartendeck)-1)
+        
+        #pruefung auf null
+        while(kartendeck[ziehen] ==0):
+            
+            ziehen=random.randint(0,len(kartendeck)-1) 
+           
+        
+        karten_spieler1.append(kartendeck[ziehen])
+        kartendeck[ziehen]=0
+        
+        
+        ziehen2=random.randint(0,len(kartendeck)-1)
+        
+        #pruefung auf null
+        while(kartendeck[ziehen2] ==0):
+            
+            ziehen2=random.randint(0,len(kartendeck)-1) 
+            
+            
+        karten_spieler2.append(kartendeck[ziehen2])
+        kartendeck[ziehen2]=0
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+runde=0 
+wert=0
+wert2=1
+
+#Main Programm
+spieler1=26
+spieler2=26
+while((spieler1<52 and spieler2<52) and (spieler1 and spieler2 >0)and(wert!=wert2)):
+    
+    #Erste Karte ziehen
+    
+    runde=runde+1
+
+    aktuel=random.randint(0,len(karten_spieler1)-1) 
+    aktuel2=random.randint(0,len(karten_spieler2)-1)
+   
+    i=0
+    #pruefung auf null
+    while(karten_spieler1[aktuel] ==0):
+        i=i+1
+        
+        aktuel=random.randint(0,len(karten_spieler1)-1) 
+        
+
+    
+    while(karten_spieler2[aktuel2] ==0):  
+        i=i+1
+        
+        aktuel2=random.randint(0,len(karten_spieler2)-1)
+        
+     
+    #Umwandlung in Wert
+    wert=wert_der_karte(karten_spieler1[aktuel])
+    wert2=wert_der_karte(karten_spieler2[aktuel2])
+    
+    #Werte vergleichen
+    if(wert>wert2):
+        spieler1=spieler1+1
+        spieler2=spieler2-1
+        
+
+        #Karten im Deck tauschen
+        print("Spieler1 zieht Karte",karten_spieler1[aktuel],"\nSpieler2 zieht Karte",karten_spieler2[aktuel2])
+        print("\nSpieler1 erhaelt die Karten\n\n")
+        karten_spieler1.append (karten_spieler2[aktuel2])
+        karten_spieler2[aktuel2]=0
+        
+
+    elif(wert2>wert):
+        spieler2=spieler2+1
+        spieler1=spieler1-1
+        
+
+        #Karten im Deck tauschen
+        print("Spieler1 zieht Karte",karten_spieler1[aktuel],"\nSpieler2 zieht Karte",karten_spieler2[aktuel2])
+        print("\nSpieler2 erhaelt die Karten\n\n")
+        karten_spieler2.append (karten_spieler1[aktuel])
+        karten_spieler1[aktuel]=0
+        
+        
+    elif(wert==wert2):
+        
+        print("Spieler1 zieht Karte",karten_spieler1[aktuel],"\nSpieler2 zieht Karte",karten_spieler2[aktuel2],"\n Die Spieler ziehen in den \"Krieg\" \n")
+        
+        zwischenspeicher1=[]    
+        zwischenspeicher2=[]    
+        
+        
+        zwischenspeicher1.append(aktuel)
+        zwischenspeicher2.append(aktuel2)
+        
+        
+        zwischenspieler=spieler1
+        zwischenspieler2=spieler2
+        
+        while(zwischenspieler>=5 and zwischenspieler2>=5 and wert==wert2):
+            for i in range(4):
+                aktuel=random.randint(0,len(karten_spieler1)-1) 
+                aktuel2=random.randint(0,len(karten_spieler2)-1) 
+                lenge=len(zwischenspeicher1)
+                
+                
+                #pruefung auf null
+                zaehler4=0
+                while(karten_spieler1[aktuel] ==0):
+                    zaehler4=zaehler4+1
+                    
+                    aktuel=random.randint(0,len(karten_spieler1)-1) 
+                    
+                    
+                    
+                while(karten_spieler2[aktuel2] ==0):
+                    zaehler4=zaehler4+1
+                    
+                    aktuel2=random.randint(0,len(karten_spieler2)-1)
+                    
+        
+        
+                #
+                zaehler=0
+                zaehler2=0
+                zaehler3=0
+                gleiche_zahl=1
+                while (gleiche_zahl):
+                    gleiche_zahl=0
+                    for y in range(len(zwischenspeicher1)):
+                        if(aktuel==zwischenspeicher1[y]):
+                            
+                            aktuel=random.randint(0,len(karten_spieler1)-1) 
+                            
+                            #pruefung auf null
+                            while(karten_spieler1[aktuel]==0):
+                                zaehler2=zaehler2+1
+                                
+                                aktuel=random.randint(0,len(karten_spieler1)-1)
+                                
+                            gleiche_zahl=1 
+                            
+                        if(aktuel2==zwischenspeicher2[y]):
+                            
+                            aktuel2=random.randint(0,len(karten_spieler2)-1) 
+                            
+                            #pruefung auf null
+                            while(karten_spieler2[aktuel2] ==0):
+                                zaehler3=zaehler3+1
+                                
+                                aktuel2=random.randint(0,len(karten_spieler2)-1)   
+                            gleiche_zahl=1 
+                            
+                zwischenspeicher1.append(aktuel)
+                zwischenspeicher2.append(aktuel2)
+                
+            lenge=len(zwischenspeicher1)
+          
+            wert=wert_der_karte(karten_spieler1[zwischenspeicher1[lenge-1]])
+            wert2=wert_der_karte(karten_spieler2[zwischenspeicher2[lenge-1]])
+            if(lenge==5):
+                zwischenspieler=zwischenspieler-5
+                zwischenspieler2=zwischenspieler2-5
+                
+            if((lenge-5)%4==0 and lenge>5):
+                zwischenspieler=zwischenspieler-4
+                zwischenspieler2=zwischenspieler2-4
+                
+                
+        #umwandlung in wert
+        lenge=len(zwischenspeicher1)
+       
+        wert=wert_der_karte(karten_spieler1[zwischenspeicher1[lenge-1]])
+        wert2=wert_der_karte(karten_spieler2[zwischenspeicher2[lenge-1]])
+        
+        
+        
+        
+        if(zwischenspieler<5 and zwischenspieler2<5 and wert==wert2):
+            print("Spieler2 und Spieler1 hat verloren, da sie nicht in den Krieg ziehen koennen")
+        elif(zwischenspieler2<5 and wert==wert2):
+            print("Spieler2 hat verloren, da er nicht in den Krieg ziehen kann")
+            
+        
+        elif(zwischenspieler<5and wert==wert2):
+            print("Spieler1 hat verloren, da er nicht in den Krieg ziehen kann")
+            
+        
+        elif(wert>wert2 ):
+            spieler1=spieler1+lenge
+            spieler2=spieler2-lenge
+            
+           
+            #Karten im Deck tauschen
+            print("Spieler1 zieht Karte",karten_spieler1[zwischenspeicher1[lenge-1]],"\nSpieler2 zieht Karte",karten_spieler2[zwischenspeicher2[lenge-1]])
+            print("\nSpieler1 erhaelt die Karten\n\n")
+            for i in range(len(zwischenspeicher2)):
+                karten_spieler1.append (karten_spieler2[zwischenspeicher2[i]])
+            for x in range(len(zwischenspeicher2)):
+                karten_spieler2[zwischenspeicher2[x]]=0
+        
+            
+        elif(wert2>wert ):
+            spieler2=spieler2+lenge
+            spieler1=spieler1-lenge
+            
+            
+            #Karten im Deck tauschen
+            print("Spieler1 zieht Karte",karten_spieler1[zwischenspeicher1[lenge-1]],"\nSpieler2 zieht Karte",karten_spieler2[zwischenspeicher2[lenge-1]])
+            print("\nSpieler2 erhaelt die Karten\n\n")
+            for i in range(len(zwischenspeicher1)):
+                karten_spieler2.append (karten_spieler1[zwischenspeicher1[i]])
+            for x in range(len(zwischenspeicher1)):
+                karten_spieler1[zwischenspeicher1[x]]=0
+                   
+                   
+
+if(spieler1==0):
+    print("Spieler 2 hat gewonnen, Spieler 1 hat verloren")                
+elif(spieler2==0):
+    print("Spieler 1 hat gewonnen, Spieler 2 hat verloren")                  
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
